@@ -1,0 +1,39 @@
+{
+  "name": "levels",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint:ts": "tsc",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "yarn lint:ts && yarn lint:js"
+  },
+  "dependencies": {
+    "expo": "~49.0.15",
+    "expo-status-bar": "~1.6.0",
+    "react": "18.2.0",
+    "react-native": "0.72.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@tsconfig/react-native": "^3.0.2",
+    "@types/jest": "^29.5.10",
+    "@types/react": "^18.2.38",
+    "@types/react-test-renderer": "^18.0.7",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-local-rules": "^2.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "5.1.6"
+  },
+  "private": true
+}
