@@ -1,9 +1,9 @@
-import type React from 'react';
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 import { useSuspense } from '@rest-hooks/react';
 
 import { CountryResource } from '@src/api/countries';
+import { GenericError } from '@src/components/GenericError';
 
 interface AppNavigationProps {}
 
@@ -12,7 +12,7 @@ const AppNavigationComponent: React.FC<AppNavigationProps> = ({}) => {
 
   console.log(countries);
 
-  return null;
+  return <GenericError />;
 };
 
 export const AppNavigation = memo(AppNavigationComponent);
