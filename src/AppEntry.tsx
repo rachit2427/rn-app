@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import type { ViewProps } from 'react-native/types';
+import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 
 import { PortalProvider } from '@gorhom/portal';
-import { NavigationContainer } from '@react-navigation/native';
 import { AsyncBoundary, CacheProvider } from '@rest-hooks/react';
 
 import { AppNavigation } from '@src/AppNavigation';
@@ -17,9 +17,9 @@ const AppEntryComponent: React.FC<ViewProps> = () => {
           fallback={<FullScreenLoader />}
           errorComponent={GenericError}
         >
-          <NavigationContainer>
+          <PaperProvider theme={MD3LightTheme}>
             <AppNavigation />
-          </NavigationContainer>
+          </PaperProvider>
         </AsyncBoundary>
       </CacheProvider>
     </PortalProvider>
