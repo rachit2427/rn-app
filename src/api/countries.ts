@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import { createResource, Entity } from '@rest-hooks/rest';
 
 import { getBaseUrl } from '@src/config/api';
@@ -25,6 +27,7 @@ export class Country extends Entity {
 
   population = 0;
   region = '';
+  subregion = '';
 
   timezone = [''];
 
@@ -38,16 +41,18 @@ export class Country extends Entity {
   pk() {
     return `${this.cca2}-${this.cca3}`;
   }
+
+  getCoverImage() {
+    return `https://picsum.photos/seed/${this.name.common}/${
+      Dimensions.get('screen').width
+    }`;
+  }
 }
 
 const CountryResourceBase = createResource({
   urlPrefix: getBaseUrl(),
   path: '/:by/:value',
   schema: [Country],
-  searchParams: {
-    fields:
-      'cca2,cca3,name,region,population,capital,flags,maps,timezone,currencies',
-  },
 });
 
 export const CountryResource = {

@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
-
-import { Portal } from '@gorhom/portal';
+import { ActivityIndicator, Portal } from 'react-native-paper';
 
 const FullScreenLoaderComponent: React.FC = () => {
   return (

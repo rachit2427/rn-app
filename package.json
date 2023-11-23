@@ -12,7 +12,6 @@
     "lint": "yarn lint:ts && yarn lint:js"
   },
   "dependencies": {
-    "@gorhom/portal": "^1.0.14",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "@rest-hooks/hooks": "^3.1.15",

@@ -5,10 +5,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native/types';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useInsetBottom } from '@src/hooks/useInsetBottom';
+import { Spacing } from '@src/utils/spacing';
 
 const ScrollViewComponent: React.FC<ScrollViewProps> = props => {
-  const insets = useSafeAreaInsets();
+  const insetBottom = useInsetBottom();
 
   const [styleProp, contentContainerStyleProp] = useMemo<
     [StyleProp<ViewStyle>, StyleProp<ViewStyle>]
@@ -18,10 +20,10 @@ const ScrollViewComponent: React.FC<ScrollViewProps> = props => {
       StyleSheet.flatten([
         props.contentContainerStyle,
         styles.contentContainer,
-        { paddingBottom: Math.max(insets.bottom + 8, 24) },
+        { paddingBottom: insetBottom },
       ]),
     ],
-    [insets.bottom, props.contentContainerStyle, props.style],
+    [insetBottom, props.contentContainerStyle, props.style],
   );
 
   return (
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
+    paddingHorizontal: Spacing.md,
   },
 });
 
