@@ -39,7 +39,7 @@ export class Country extends Entity {
   };
 
   pk() {
-    return `${this.cca2}-${this.cca3}`;
+    return `cca2-${this.cca2}`;
   }
 
   getCoverImage() {
@@ -51,7 +51,7 @@ export class Country extends Entity {
 
 const CountryResourceBase = createResource({
   urlPrefix: getBaseUrl(),
-  path: '/:by/:value',
+  path: '/alpha/:value',
   schema: [Country],
 });
 
@@ -60,5 +60,20 @@ export const CountryResource = {
   getList: CountryResourceBase.getList.extend({
     path: '/all',
     schema: [Country],
+  }),
+  getByName: CountryResourceBase.get.extend({
+    path: '/name/:value',
+  }),
+  getByCurrency: CountryResourceBase.get.extend({
+    path: '/currency/:value',
+  }),
+  getByCapital: CountryResourceBase.get.extend({
+    path: '/capital/:value',
+  }),
+  getByRegion: CountryResourceBase.get.extend({
+    path: '/region/:value',
+  }),
+  getBySubregion: CountryResourceBase.get.extend({
+    path: '/subregion/:value',
   }),
 };

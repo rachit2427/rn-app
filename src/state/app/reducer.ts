@@ -4,11 +4,11 @@ import { type AppActions, setRandomSeedAction } from '@src/state/app/actions';
 import { getType } from '@src/utils/state';
 
 export interface AppState {
-  randomSeed: number;
+  shuffleSeed: number;
 }
 
 const initialState: AppState = {
-  randomSeed: Math.random(),
+  shuffleSeed: Math.random(),
 };
 
 const AppReducer = (state: AppState, action: AppActions): AppState => {
@@ -16,7 +16,7 @@ const AppReducer = (state: AppState, action: AppActions): AppState => {
     case getType(setRandomSeedAction):
       return {
         ...state,
-        randomSeed: Math.random(),
+        shuffleSeed: Math.random(),
       };
 
     default:

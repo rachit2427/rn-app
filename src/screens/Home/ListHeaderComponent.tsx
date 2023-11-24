@@ -1,21 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Divider, Searchbar, useTheme } from 'react-native-paper';
 
-import { useAppDispatch } from '@src/state/app';
-import { setRandomSeedAction } from '@src/state/app/actions';
 import { translations } from '@src/translations';
 import { Spacing } from '@src/utils/spacing';
 
-const ListHeaderComponentRaw: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const dispatch = useAppDispatch();
-  const theme = useTheme();
+interface Props {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+}
 
-  const onPressShuffle = useCallback(
-    () => dispatch(setRandomSeedAction()),
-    [dispatch],
-  );
+const ListHeaderComponentRaw: React.FC<Props> = ({
+  searchQuery,
+  setSearchQuery,
+}) => {
+  const theme = useTheme();
 
   return (
     <View
@@ -35,13 +34,13 @@ const ListHeaderComponentRaw: React.FC = () => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
           <Button mode="contained-tonal">
-            {translations.screens.home.cta.search}
+            {translations.screens.home.cta.shuffle}
           </Button>
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button mode="contained-tonal" onPress={onPressShuffle}>
-            {translations.screens.home.cta.shuffle}
+          <Button mode="contained-tonal">
+            {translations.screens.home.cta.search}
           </Button>
         </View>
       </View>

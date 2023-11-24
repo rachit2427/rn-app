@@ -8,7 +8,6 @@ import { useSuspense } from '@rest-hooks/react';
 import { CountryResource } from '@src/api/countries';
 import type { RootStackParamList } from '@src/config/navigation';
 import { defaultNavigationOptions, Routes } from '@src/config/navigation';
-import { Home } from '@src/screens/Home';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { LightTheme } = adaptNavigationTheme({
@@ -24,7 +23,18 @@ const AppNavigationComponent: React.FC = () => {
         initialRouteName={Routes.Home}
         screenOptions={defaultNavigationOptions}
       >
-        <Stack.Screen name={Routes.Home} component={Home} />
+        <Stack.Screen
+          name={Routes.Home}
+          getComponent={() => require('./screens/Home').Home}
+        />
+
+        <Stack.Screen
+          name={Routes.CountryDetail}
+          getComponent={() => require('./screens/CountryDetail').CountryDetail}
+          options={({ route }) => ({
+            headerTitle: route.params.name,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
