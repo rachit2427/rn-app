@@ -2,14 +2,28 @@ import React, { memo, useCallback } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
-import type { Country } from '@src/api/countries';
+import { useNavigation } from '@react-navigation/native';
+
+import type { Country } from '@src/api/types';
+import { Routes } from '@src/config/navigation';
 import { translations } from '@src/translations';
+import { Spacing } from '@src/utils/spacing';
 
 interface CountryItemProps {
   country: Country;
 }
 
 const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
+  const navigation = useNavigation();
+
+  const onPress = useCallback(
+    () =>
+      navigation.navigate(Routes.CountryDetail, {
+        id: country.id,
+      }),
+    [country.id, navigation],
+  );
+
   const Flag = useCallback(
     () => (
       <Image
@@ -37,7 +51,15 @@ const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
       />
 
       <Card.Actions>
-        <Button mode="contained">
+        <Button
+          style={styles.cta}
+          mode="contained"
+          hitSlop={{
+            top: 10,
+            bottom: 10,
+          }}
+          onPress={onPress}
+        >
           {translations.screens.home.countryCard.cta}
         </Button>
       </Card.Actions>
@@ -51,6 +73,10 @@ const styles = StyleSheet.create({
   },
   leftStyle: {
     width: 50,
+  },
+  cta: {
+    width: '100%',
+    marginTop: Spacing.sm,
   },
 });
 

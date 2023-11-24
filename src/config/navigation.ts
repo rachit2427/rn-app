@@ -1,3 +1,4 @@
+import type { RouteProp as RoutePropBase } from '@react-navigation/native';
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
 import type { CountryDetailProps } from '@src/screens/CountryDetail';
@@ -19,3 +20,5 @@ export const defaultNavigationOptions: NativeStackNavigationOptions = {
   headerBackTitleVisible: false,
   headerTitle: '',
 };
+
+export type RouteProp<R extends Routes> = RoutePropBase<RootStackParamList, R>;

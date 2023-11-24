@@ -2,53 +2,15 @@ import { Dimensions } from 'react-native';
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import type { Country } from '@src/api/types';
 import { getBaseUrl } from '@src/config/api';
-
-export interface Country {
-  id: string;
-  coverImage: string;
-
-  cca2: string;
-  cca3: string;
-
-  name: {
-    common: string;
-    official: string;
-  };
-
-  capital: string[];
-
-  region: string;
-  subregion: string;
-
-  population: number;
-  currencies: Record<
-    string,
-    {
-      name: string;
-      symbol: string;
-    }
-  >;
-
-  flags: {
-    png: string;
-    svg: string;
-    alt: string;
-  };
-
-  maps: {
-    googleMaps: string;
-    openStreetMaps: string;
-  };
-
-  timezone: string[];
-}
+import { setCountryMapAction } from '@src/state/country/countrySlice';
 
 export const countryApi = createApi({
   reducerPath: 'countryApi',
   baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: builder => ({
-    getAllCountries: builder.query<Country[], string>({
+    getAllCountries: builder.query<Country[], void>({
       query: () => ({
         url: '/all',
         params: {
@@ -63,7 +25,8 @@ export const countryApi = createApi({
             'currencies',
             'flags',
             'maps',
-            'timezone',
+            'timezones',
+            'languages',
           ].join(','),
         },
       }),
@@ -75,6 +38,19 @@ export const countryApi = createApi({
             Dimensions.get('screen').width
           }`,
         })),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        try {
+          const { data: countries } = await queryFulfilled;
+
+          dispatch(
+            setCountryMapAction(
+              Object.fromEntries(
+                countries.map(country => [country.id, country]),
+              ),
+            ),
+          );
+        } catch {}
+      },
     }),
   }),
 });

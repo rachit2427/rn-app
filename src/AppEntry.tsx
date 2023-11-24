@@ -10,7 +10,7 @@ import { store } from '@src/state/app/store';
 
 const AppEntryComponent: React.FC<ViewProps> = () => {
   return (
-    <ErrorBoundary FallbackComponent={GenericError} onReset={details => {}}>
+    <ErrorBoundary FallbackComponent={GenericError}>
       <Provider store={store}>
         <PaperProvider theme={MD3LightTheme}>
           <AppNavigation />

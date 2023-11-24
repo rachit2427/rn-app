@@ -1,22 +1,39 @@
 import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import type { FallbackProps } from 'react-error-boundary';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
-interface GenericErrorProps {
-  error?: Error;
-}
+import { translations } from '@src/translations';
+import { Spacing } from '@src/utils/spacing';
 
-const GenericErrorComponent: React.FC<GenericErrorProps> = ({ error }) => {
+const GenericErrorComponent: React.FC<FallbackProps> = ({
+  error,
+  resetErrorBoundary,
+}) => {
   return (
     <View style={styles.container}>
-      <Text>Whoops!</Text>
-      <Text>Something went wrong! :(</Text>
+      <Text variant="titleLarge">
+        {translations.components.genericError.title}
+      </Text>
 
-      {error && (
-        <>
-          <Text>Error:</Text>
-          <Text>{error.message}</Text>
-        </>
-      )}
+      <Text variant="bodyLarge">
+        {translations.components.genericError.description}
+      </Text>
+
+      {error && error instanceof Error ? (
+        <Text style={styles.spacing} variant="bodyMedium">
+          {`${translations.components.genericError.error}: ${error.message}`}
+        </Text>
+      ) : null}
+
+      <Button
+        style={styles.spacing}
+        onPress={resetErrorBoundary}
+        mode="contained-tonal"
+        contentStyle={styles.button}
+      >
+        {translations.components.genericError.retry}
+      </Button>
     </View>
   );
 };
@@ -26,6 +43,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  spacing: {
+    marginTop: Spacing.md,
+  },
+  button: {
+    paddingHorizontal: Spacing.md,
   },
 });
 

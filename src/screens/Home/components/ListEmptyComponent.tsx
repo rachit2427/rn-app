@@ -9,7 +9,7 @@ import { translations } from '@src/translations';
 interface ListEmptyComponentProps {}
 
 const ListEmptyComponentComponent: React.FC<ListEmptyComponentProps> = ({}) => {
-  const { isLoading } = useGetAllCountriesQuery('');
+  const { isLoading } = useGetAllCountriesQuery();
 
   if (isLoading) return <Loader />;
 

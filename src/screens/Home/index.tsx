@@ -2,7 +2,8 @@ import React, { useCallback } from 'react';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import type { ListRenderItem } from 'react-native/types';
 
-import { type Country, useGetAllCountriesQuery } from '@src/api/countries';
+import { useGetAllCountriesQuery } from '@src/api/countries';
+import type { Country } from '@src/api/types';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
 import { useInsetBottom } from '@src/hooks/useInsetBottom';
 import { CountryItem } from '@src/screens/Home/components/CountryItem';
@@ -12,7 +13,7 @@ import { useCountries } from '@src/screens/Home/hooks/useCountries';
 import { Spacing } from '@src/utils/spacing';
 
 const HomeComponent: React.FC = () => {
-  const { error, isLoading, refetch } = useGetAllCountriesQuery('');
+  const { error, isLoading, refetch } = useGetAllCountriesQuery();
   if (error) throw error;
 
   const countries = useCountries();

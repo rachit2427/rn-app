@@ -1,4 +1,12 @@
 export const EnglishTranslations = {
+  components: {
+    genericError: {
+      title: 'Whoops!',
+      description: 'Something went wrong. :(',
+      error: 'Error',
+      retry: 'Retry',
+    },
+  },
   screens: {
     home: {
       input: {
@@ -20,12 +28,15 @@ export const EnglishTranslations = {
         },
       },
       countryCard: {
-        cta: 'See more',
+        cta: 'Learn more',
       },
       emptyList: {
         title: 'Whoops!',
         description: "Looks like there's nothing to show at the moment! :(",
       },
+    },
+    countryDetail: {
+      noCountry: "Whoops! Looks like we couldn't find that country. :(",
     },
   },
 };
