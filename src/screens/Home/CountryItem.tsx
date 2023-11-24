@@ -24,7 +24,7 @@ const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
 
   return (
     <Card style={styles.card}>
-      <Card.Cover source={{ uri: country.getCoverImage() }} />
+      <Card.Cover source={{ uri: country.coverImage }} />
 
       <Card.Title
         title={`${country.name.official} / ${country.name.common}`}

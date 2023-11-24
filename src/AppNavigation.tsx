@@ -3,9 +3,7 @@ import { adaptNavigationTheme } from 'react-native-paper';
 
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSuspense } from '@rest-hooks/react';
 
-import { CountryResource } from '@src/api/countries';
 import type { RootStackParamList } from '@src/config/navigation';
 import { defaultNavigationOptions, Routes } from '@src/config/navigation';
 
@@ -14,30 +12,26 @@ const { LightTheme } = adaptNavigationTheme({
   reactNavigationLight: DefaultTheme,
 });
 
-const AppNavigationComponent: React.FC = () => {
-  useSuspense(CountryResource.getList);
+const AppNavigationComponent: React.FC = () => (
+  <NavigationContainer theme={LightTheme}>
+    <Stack.Navigator
+      initialRouteName={Routes.Home}
+      screenOptions={defaultNavigationOptions}
+    >
+      <Stack.Screen
+        name={Routes.Home}
+        getComponent={() => require('./screens/Home').Home}
+      />
 
-  return (
-    <NavigationContainer theme={LightTheme}>
-      <Stack.Navigator
-        initialRouteName={Routes.Home}
-        screenOptions={defaultNavigationOptions}
-      >
-        <Stack.Screen
-          name={Routes.Home}
-          getComponent={() => require('./screens/Home').Home}
-        />
-
-        <Stack.Screen
-          name={Routes.CountryDetail}
-          getComponent={() => require('./screens/CountryDetail').CountryDetail}
-          options={({ route }) => ({
-            headerTitle: route.params.name,
-          })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+      <Stack.Screen
+        name={Routes.CountryDetail}
+        getComponent={() => require('./screens/CountryDetail').CountryDetail}
+        options={({ route }) => ({
+          headerTitle: route.params.name,
+        })}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
+);
 
 export const AppNavigation = memo(AppNavigationComponent);

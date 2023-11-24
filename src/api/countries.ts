@@ -1,79 +1,82 @@
 import { Dimensions } from 'react-native';
 
-import { createResource, Entity } from '@rest-hooks/rest';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { getBaseUrl } from '@src/config/api';
 
-export class Country extends Entity {
-  cca2 = '';
-  cca3 = '';
+export interface Country {
+  id: string;
+  coverImage: string;
 
-  capital = [''];
-  flags = {
-    png: '',
-    svg: '',
-    alt: '',
+  cca2: string;
+  cca3: string;
+
+  name: {
+    common: string;
+    official: string;
   };
 
-  maps = {
-    googleMaps: '',
-    openStreetMaps: '',
+  capital: string[];
+
+  region: string;
+  subregion: string;
+
+  population: number;
+  currencies: Record<
+    string,
+    {
+      name: string;
+      symbol: string;
+    }
+  >;
+
+  flags: {
+    png: string;
+    svg: string;
+    alt: string;
   };
 
-  name = {
-    common: '',
-    official: '',
+  maps: {
+    googleMaps: string;
+    openStreetMaps: string;
   };
 
-  population = 0;
-  region = '';
-  subregion = '';
-
-  timezone = [''];
-
-  currencies = {
-    '': {
-      name: '',
-      symbol: '',
-    },
-  };
-
-  pk() {
-    return `cca2-${this.cca2}`;
-  }
-
-  getCoverImage() {
-    return `https://picsum.photos/seed/${this.name.common}/${
-      Dimensions.get('screen').width
-    }`;
-  }
+  timezone: string[];
 }
 
-const CountryResourceBase = createResource({
-  urlPrefix: getBaseUrl(),
-  path: '/alpha/:value',
-  schema: [Country],
+export const countryApi = createApi({
+  reducerPath: 'countryApi',
+  baseQuery: fetchBaseQuery({ baseUrl: getBaseUrl() }),
+  endpoints: builder => ({
+    getAllCountries: builder.query<Country[], string>({
+      query: () => ({
+        url: '/all',
+        params: {
+          fields: [
+            'cca2',
+            'cca3',
+            'name',
+            'capital',
+            'region',
+            'subregion',
+            'population',
+            'currencies',
+            'flags',
+            'maps',
+            'timezone',
+          ].join(','),
+        },
+      }),
+      transformResponse: (response: Country[]) =>
+        response.map(country => ({
+          ...country,
+          id: `${country.cca2}-${country.cca3}`,
+          coverImage: `https://picsum.photos/seed/${country.name.common}/${
+            Dimensions.get('screen').width
+          }`,
+        })),
+    }),
+  }),
 });
 
-export const CountryResource = {
-  ...CountryResourceBase,
-  getList: CountryResourceBase.getList.extend({
-    path: '/all',
-    schema: [Country],
-  }),
-  getByName: CountryResourceBase.get.extend({
-    path: '/name/:value',
-  }),
-  getByCurrency: CountryResourceBase.get.extend({
-    path: '/currency/:value',
-  }),
-  getByCapital: CountryResourceBase.get.extend({
-    path: '/capital/:value',
-  }),
-  getByRegion: CountryResourceBase.get.extend({
-    path: '/region/:value',
-  }),
-  getBySubregion: CountryResourceBase.get.extend({
-    path: '/subregion/:value',
-  }),
-};
+export const { useGetAllCountriesQuery } = countryApi;

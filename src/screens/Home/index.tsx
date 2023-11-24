@@ -1,11 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import type { ListRenderItem } from 'react-native/types';
 
-import { useSuspense } from '@rest-hooks/react';
-
-import type { Country } from '@src/api/countries';
-import { CountryResource } from '@src/api/countries';
+import { type Country, useGetAllCountriesQuery } from '@src/api/countries';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
 import { useInsetBottom } from '@src/hooks/useInsetBottom';
 import { CountryItem } from '@src/screens/Home/CountryItem';
@@ -14,12 +11,13 @@ import { Spacing } from '@src/utils/spacing';
 
 const HomeComponent: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { data: countries, error } = useGetAllCountriesQuery('');
+  if (error) throw error;
 
-  const countries = useSuspense(CountryResource.getList);
   const insetBottom = useInsetBottom();
 
   const renderItem = useCallback<ListRenderItem<Country>>(
-    ({ item }) => <CountryItem country={item} key={item.pk()} />,
+    ({ item }) => <CountryItem country={item} key={item.id} />,
     [],
   );
 
@@ -33,11 +31,11 @@ const HomeComponent: React.FC = () => {
     [searchQuery],
   );
 
-  const filteredCountries = useMemo(
-    () =>
-      countries.filter(country => country.name.common.startsWith(searchQuery)),
-    [countries, searchQuery],
-  );
+  // const filteredCountries = useMemo(
+  //   () =>
+  //     countries.filter(country => country.name.common.startsWith(searchQuery)),
+  //   [countries, searchQuery],
+  // );
 
   return (
     <KeyboardAwareView style={styles.container}>
