@@ -1,18 +1,21 @@
-import React, { useCallback, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import React, { useCallback } from 'react';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import type { ListRenderItem } from 'react-native/types';
 
 import { type Country, useGetAllCountriesQuery } from '@src/api/countries';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
 import { useInsetBottom } from '@src/hooks/useInsetBottom';
-import { CountryItem } from '@src/screens/Home/CountryItem';
-import { ListHeaderComponent } from '@src/screens/Home/ListHeaderComponent';
+import { CountryItem } from '@src/screens/Home/components/CountryItem';
+import { ListEmptyComponent } from '@src/screens/Home/components/ListEmptyComponent';
+import { ListHeaderComponent } from '@src/screens/Home/components/ListHeaderComponent';
+import { useCountries } from '@src/screens/Home/hooks/useCountries';
 import { Spacing } from '@src/utils/spacing';
 
 const HomeComponent: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const { data: countries, error } = useGetAllCountriesQuery('');
+  const { error, isLoading, refetch } = useGetAllCountriesQuery('');
   if (error) throw error;
+
+  const countries = useCountries();
 
   const insetBottom = useInsetBottom();
 
@@ -21,33 +24,24 @@ const HomeComponent: React.FC = () => {
     [],
   );
 
-  const listHeaderComponent = useCallback(
-    () => (
-      <ListHeaderComponent
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-    ),
-    [searchQuery],
-  );
-
-  // const filteredCountries = useMemo(
-  //   () =>
-  //     countries.filter(country => country.name.common.startsWith(searchQuery)),
-  //   [countries, searchQuery],
-  // );
-
   return (
     <KeyboardAwareView style={styles.container}>
       <FlatList
         data={countries}
         renderItem={renderItem}
-        contentContainerStyle={{
-          paddingBottom: insetBottom,
-          paddingHorizontal: Spacing.md,
-        }}
-        ListHeaderComponent={listHeaderComponent}
+        style={styles.flatlist}
+        contentContainerStyle={[
+          styles.flatlistContent,
+          { paddingBottom: insetBottom },
+        ]}
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={ListEmptyComponent}
         stickyHeaderIndices={[0]}
+        refreshControl={
+          <RefreshControl onRefresh={refetch} refreshing={isLoading} />
+        }
+        refreshing={isLoading}
+        keyboardDismissMode="on-drag"
       />
     </KeyboardAwareView>
   );
@@ -58,6 +52,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Spacing.md,
   },
+  flatlist: { flex: 1 },
+  flatlistContent: { flexGrow: 1, paddingHorizontal: Spacing.md },
 });
 
 export const Home = HomeComponent;

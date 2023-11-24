@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Divider, Searchbar, useTheme } from 'react-native-paper';
 
+import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
+import { setSearchQueryAction } from '@src/state/country/countrySlice';
 import { translations } from '@src/translations';
 import { Spacing } from '@src/utils/spacing';
 
-interface Props {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-}
-
-const ListHeaderComponentRaw: React.FC<Props> = ({
-  searchQuery,
-  setSearchQuery,
-}) => {
+const ListHeaderComponentRaw: React.FC = () => {
   const theme = useTheme();
+  const searchQuery = useAppSelector(state => state.country.searchQuery);
+  const dispatch = useAppDispatch();
+
+  const setSearchQuery = useCallback(
+    (query: string) => {
+      dispatch(setSearchQueryAction(query.trim()));
+    },
+    [dispatch],
+  );
 
   return (
     <View

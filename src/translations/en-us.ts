@@ -22,6 +22,10 @@ export const EnglishTranslations = {
       countryCard: {
         cta: 'See more',
       },
+      emptyList: {
+        title: 'Whoops!',
+        description: "Looks like there's nothing to show at the moment! :(",
+      },
     },
   },
 };
