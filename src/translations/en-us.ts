@@ -37,6 +37,18 @@ export const EnglishTranslations = {
     },
     countryDetail: {
       noCountry: "Whoops! Looks like we couldn't find that country. :(",
+      mapDialog: {
+        title: 'Whoops!',
+        description: "We couldn't open the country's map link",
+        cta: 'Close',
+      },
+      listItems: {
+        capital: 'Capital',
+        population: 'Population',
+        languages: 'Languages',
+        currencies: 'Currencies',
+        timezones: 'Timezones',
+      },
     },
   },
 };

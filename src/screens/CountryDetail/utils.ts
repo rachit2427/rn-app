@@ -1,31 +1,32 @@
 import type { Country } from '@src/api/types';
+import { translations } from '@src/translations';
 
 export const getListItems = (country: Country | undefined) => [
   {
     icon: 'map-marker',
-    title: 'Capital',
+    title: translations.screens.countryDetail.listItems.capital,
     items: country?.capital || [],
   },
   {
     icon: 'account-group',
-    title: 'Population',
+    title: translations.screens.countryDetail.listItems.population,
     items: [country?.population?.toLocaleString() || ''],
   },
   {
     icon: 'translate',
-    title: 'Languages',
+    title: translations.screens.countryDetail.listItems.languages,
     items: Object.values(country?.languages || {}),
   },
   {
     icon: 'cash-multiple',
-    title: 'Currencies',
+    title: translations.screens.countryDetail.listItems.currencies,
     items: Object.values(country?.currencies || {}).map(
       currency => `${currency.name} (${currency.symbol})`,
     ),
   },
   {
     icon: 'map-clock',
-    title: 'Timezones',
+    title: translations.screens.countryDetail.listItems.timezones,
     items: country?.timezones || [],
   },
 ];

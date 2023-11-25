@@ -26,7 +26,7 @@ const AppNavigationComponent: React.FC = () => (
       <Stack.Screen
         name={Routes.CountryDetail}
         getComponent={() => require('./screens/CountryDetail').CountryDetail}
-        options={{ headerTransparent: true }}
+        // options={{ headerTransparent: true }}
       />
     </Stack.Navigator>
   </NavigationContainer>

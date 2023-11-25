@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
-import { Image, Linking, ScrollView, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Surface, Text } from 'react-native-paper';
+import { Image, Linking, ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 import { useRoute } from '@react-navigation/native';
 
@@ -13,6 +13,7 @@ import {
 } from '@src/screens/CountryDetail/components/ListItem';
 import { getListItems } from '@src/screens/CountryDetail/utils';
 import { useCountry } from '@src/screens/Home/hooks/useCountries';
+import { translations } from '@src/translations';
 import { Spacing } from '@src/utils/spacing';
 
 export interface CountryDetailProps {
@@ -57,15 +58,15 @@ const CountryDetailComponent: React.FC = () => {
         { paddingBottom: insetBottom },
       ]}
     >
-      <Image
-        source={{ uri: country.flags.png }}
-        alt={country.flags.alt}
-        style={styles.imageBanner}
-        resizeMode="cover"
-      />
+      <View style={styles.contentContainer}>
+        <Image
+          source={{ uri: country.flags.png }}
+          alt={country.flags.alt}
+          style={styles.imageBanner}
+          resizeMode="cover"
+        />
 
-      <Surface style={styles.contentContainer}>
-        <Text variant="headlineSmall">
+        <Text variant="headlineSmall" style={styles.itemSpacing}>
           {`${country.name.official} / ${country.name.common}`}
         </Text>
 
@@ -73,32 +74,42 @@ const CountryDetailComponent: React.FC = () => {
           {`${country.region} / ${country.subregion}`}
         </Text>
 
-        {listItems.map((item, index) => (
-          <ListItem
-            key={item.title}
-            {...item}
-            divider={index !== listItems.length - 1}
-          />
-        ))}
+        <View style={styles.itemSpacing}>
+          {listItems.map((item, index) => (
+            <ListItem
+              key={item.title}
+              {...item}
+              divider={index !== listItems.length - 1}
+            />
+          ))}
+        </View>
+      </View>
 
-        <Button
-          mode="contained-tonal"
-          style={{ marginTop: Spacing.md }}
-          icon={'google-maps'}
-          onPress={onPressMap}
-        >
-          Find us on Google Maps
-        </Button>
-      </Surface>
+      <Button
+        mode="contained-tonal"
+        style={{ marginTop: Spacing.md }}
+        icon={'google-maps'}
+        onPress={onPressMap}
+      >
+        Find us on Google Maps
+      </Button>
 
       <Portal>
         <Dialog visible={showDialog} onDismiss={hideDialog}>
-          <Dialog.Title>Alert</Dialog.Title>
+          <Dialog.Title>
+            {translations.screens.countryDetail.mapDialog.title}
+          </Dialog.Title>
+
           <Dialog.Content>
-            <Text variant="bodyMedium">This is simple dialog</Text>
+            <Text variant="bodyMedium">
+              {translations.screens.countryDetail.mapDialog.description}
+            </Text>
           </Dialog.Content>
+
           <Dialog.Actions>
-            <Button onPress={hideDialog}>Done</Button>
+            <Button onPress={hideDialog}>
+              {translations.screens.countryDetail.mapDialog.cta}
+            </Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
@@ -112,16 +123,18 @@ const styles = StyleSheet.create({
   },
   scrollviewContent: {
     flexGrow: 1,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.md,
   },
   imageBanner: {
     width: '100%',
     height: 200,
   },
   contentContainer: {
-    marginHorizontal: Spacing.xs,
-    marginTop: Spacing.xs,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.md,
+    flex: 1,
+  },
+  itemSpacing: {
+    marginTop: Spacing.md,
   },
 });
 
