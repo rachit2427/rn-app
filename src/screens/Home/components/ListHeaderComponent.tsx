@@ -37,13 +37,13 @@ const ListHeaderComponentRaw: React.FC = () => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
           <Button mode="contained-tonal">
-            {translations.screens.home.cta.shuffle}
+            {translations.screens.home.cta.sort}
           </Button>
         </View>
 
         <View style={styles.buttonWrapper}>
           <Button mode="contained-tonal">
-            {translations.screens.home.cta.search}
+            {translations.screens.home.cta.filter}
           </Button>
         </View>
       </View>

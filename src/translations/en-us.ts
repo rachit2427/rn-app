@@ -13,8 +13,8 @@ export const EnglishTranslations = {
         label: 'Find your next destination',
       },
       cta: {
-        search: 'Search',
-        shuffle: 'Shuffle',
+        sort: 'Sort by',
+        filter: 'Filter by',
       },
       alert: {
         shuffleWithSearch: {
