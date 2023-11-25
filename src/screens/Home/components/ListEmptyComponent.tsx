@@ -4,7 +4,7 @@ import { Text } from 'react-native-paper';
 
 import { useGetAllCountriesQuery } from '@src/api/countries';
 import { Loader } from '@src/components/Loader';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 
 interface ListEmptyComponentProps {}
 

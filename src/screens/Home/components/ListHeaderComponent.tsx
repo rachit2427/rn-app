@@ -6,7 +6,7 @@ import { FilterButton } from '@src/screens/Home/components/FilterButton';
 import { SortButton } from '@src/screens/Home/components/SortButton';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setSearchQueryAction } from '@src/state/country/countrySlice';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
 const ListHeaderComponentRaw: React.FC = () => {

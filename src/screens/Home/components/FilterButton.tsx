@@ -5,7 +5,7 @@ import { ButtonWithMenu } from '@src/components/ButtonWithMenu';
 import { useMountedRef } from '@src/hooks/useMountedRef';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setFilterAction } from '@src/state/country/countrySlice';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 
 const FilterButtonComponent: React.FC = () => {
   const dispatch = useAppDispatch();

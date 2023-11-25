@@ -1,4 +1,4 @@
-import type { translations } from '@src/translations';
+import type { translations } from '@src/service/translations';
 
 export interface Country {
   id: string;

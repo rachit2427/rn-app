@@ -21,7 +21,7 @@ import {
 } from '@src/screens/CountryDetail/components/ListItem';
 import { getListItems } from '@src/screens/CountryDetail/utils';
 import { useCountry } from '@src/screens/Home/hooks/useCountries';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
 export interface CountryDetailProps {

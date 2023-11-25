@@ -1,17 +1,20 @@
+import { persistStore } from 'redux-persist';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { countryApi } from '@src/api/countries';
-import { countryReducer } from '@src/state/country/countrySlice';
+import { persistedReducer } from '@src/state/app/persistConfig';
 
 export const store = configureStore({
-  reducer: {
-    country: countryReducer,
-    [countryApi.reducerPath]: countryApi.reducer,
-  },
+  reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(countryApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    }).concat(countryApi.middleware),
 });
+
+export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 

@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import type { Country } from '@src/api/types';
 import { Routes } from '@src/config/navigation';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
 interface CountryItemProps {

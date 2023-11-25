@@ -3,7 +3,7 @@ import type { FallbackProps } from 'react-error-boundary';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
 const GenericErrorComponent: React.FC<FallbackProps> = ({
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: Spacing.md,
   },
   spacing: {
     marginTop: Spacing.md,

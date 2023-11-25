@@ -1,5 +1,5 @@
 import type { Country } from '@src/api/types';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 
 export const getListItems = (country: Country | undefined) =>
   [

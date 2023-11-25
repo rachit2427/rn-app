@@ -1,4 +1,4 @@
-import { EnglishTranslations } from '@src/translations/en-us';
+import { EnglishTranslations } from '@src/service/translations/en-us';
 
 type supportedLocales = 'en-US';
 

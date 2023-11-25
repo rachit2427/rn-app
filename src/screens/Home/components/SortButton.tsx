@@ -5,7 +5,7 @@ import type { SortKey } from '@src/api/types';
 import { ButtonWithMenu } from '@src/components/ButtonWithMenu';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setSortKeyAction } from '@src/state/country/countrySlice';
-import { translations } from '@src/translations';
+import { translations } from '@src/service/translations';
 
 const SortButtonComponent: React.FC = () => {
   const theme = useTheme();
