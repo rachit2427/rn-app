@@ -16,8 +16,9 @@ const HeaderRightComponent: React.FC = () => {
   const closeMenu = useCallback(() => setVisible(false), []);
 
   const openFavourites = useCallback(() => {
+    closeMenu();
     navigation.navigate(Routes.Favourites);
-  }, [navigation]);
+  }, [closeMenu, navigation]);
 
   return (
     <View style={styles.container}>

@@ -20,7 +20,7 @@ const AppNavigationComponent: React.FC = () => (
     >
       <Stack.Screen
         name={Routes.Home}
-        getComponent={() => require('./screens/Home').Home}
+        getComponent={() => require('./screens/CountryList').CountryList}
       />
 
       <Stack.Screen
@@ -30,7 +30,8 @@ const AppNavigationComponent: React.FC = () => (
 
       <Stack.Screen
         name={Routes.Favourites}
-        getComponent={() => require('./screens/Home').Home}
+        getComponent={() => require('./screens/CountryList').CountryList}
+        options={{ headerRight: undefined }}
       />
     </Stack.Navigator>
   </NavigationContainer>

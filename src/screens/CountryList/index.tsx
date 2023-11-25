@@ -12,7 +12,7 @@ import { ListHeaderComponent } from '@src/screens/CountryList/components/ListHea
 import { useCountries } from '@src/screens/CountryList/hooks/useCountries';
 import { Spacing } from '@src/utils/spacing';
 
-const HomeComponent: React.FC = () => {
+const CountryListComponent: React.FC = () => {
   const { error, isLoading, refetch } = useGetAllCountriesQuery();
   if (error) throw error;
 
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   flatlistContent: { flexGrow: 1, paddingHorizontal: Spacing.md },
 });
 
-export const Home = HomeComponent;
+export const CountryList = CountryListComponent;
