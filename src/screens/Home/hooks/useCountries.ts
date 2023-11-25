@@ -5,24 +5,26 @@ import type { Country } from '@src/api/types';
 import { useAppSelector } from '@src/state/app/hooks';
 
 export const useCountries = () => {
-  const searchQuery = useAppSelector(state => state.country.searchQuery);
+  const { searchQuery, filter } = useAppSelector(state => state.country);
   const { data: allCountries } = useGetAllCountriesQuery();
 
   return useMemo(() => {
-    if (!allCountries || !searchQuery.trim()) {
+    if (!allCountries) {
       return allCountries;
     }
 
     return allCountries.filter(
       country =>
-        country.name.common
+        (country.name.common
           .toLowerCase()
-          .startsWith(searchQuery.toLowerCase()) ||
-        country.name.official
-          .toLowerCase()
-          .startsWith(searchQuery.toLowerCase()),
+          .startsWith(searchQuery.trim().toLowerCase()) ||
+          country.name.official
+            .toLowerCase()
+            .startsWith(searchQuery.trim().toLowerCase())) &&
+        (!filter.region || country.region === filter.region) &&
+        (!filter.subregion || country.subregion === filter.subregion),
     );
-  }, [searchQuery, allCountries]);
+  }, [allCountries, searchQuery, filter]);
 };
 
 export const useCountry = (id: Country['id']): Country | undefined =>
