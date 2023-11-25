@@ -4,6 +4,7 @@ import { type ViewProps } from 'react-native';
 import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 
+import { StatusBar } from 'expo-status-bar';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { AppNavigation } from '@src/AppNavigation';
@@ -17,6 +18,7 @@ const AppEntryComponent: React.FC<ViewProps> = () => {
       <Provider store={store}>
         <PaperProvider theme={MD3LightTheme}>
           <PersistGate loading={<FullScreenLoader />} persistor={persistor}>
+            <StatusBar style="dark" />
             <AppNavigation />
           </PersistGate>
         </PaperProvider>

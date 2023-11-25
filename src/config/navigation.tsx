@@ -7,11 +7,13 @@ import type { CountryListProps } from '@src/screens/CountryList';
 export enum Routes {
   CountryList = 'CountryList',
   CountryDetail = 'CountryDetail',
+  About = 'About',
 }
 
 export type RootStackParamList = {
   [Routes.CountryList]: CountryListProps;
   [Routes.CountryDetail]: CountryDetailProps;
+  [Routes.About]: undefined;
 };
 
 export type RouteProp<R extends Routes> = RoutePropBase<RootStackParamList, R>;

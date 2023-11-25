@@ -21,6 +21,11 @@ const HeaderRightComponent: React.FC = () => {
     navigation.push(Routes.CountryList, { isFavouriteList: true });
   }, [closeMenu, navigation]);
 
+  const navigateToAbout = useCallback(() => {
+    closeMenu();
+    navigation.push(Routes.About);
+  }, [closeMenu, navigation]);
+
   return (
     <View style={styles.container}>
       <Menu
@@ -31,6 +36,7 @@ const HeaderRightComponent: React.FC = () => {
             icon="dots-vertical"
             size={24}
             iconColor={MD3Colors.primary40}
+            style={styles.iconStyle}
             onPress={openMenu}
           />
         }
@@ -38,8 +44,14 @@ const HeaderRightComponent: React.FC = () => {
       >
         <Menu.Item
           onPress={openFavourites}
-          leadingIcon="heart"
+          leadingIcon="heart-multiple-outline"
           title={translations.components.headerRight.favourites}
+        />
+
+        <Menu.Item
+          onPress={navigateToAbout}
+          leadingIcon="information-outline"
+          title={translations.components.headerRight.about}
         />
       </Menu>
     </View>
@@ -49,6 +61,9 @@ const HeaderRightComponent: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     marginRight: -Spacing.md,
+  },
+  iconStyle: {
+    paddingBottom: Spacing.xs,
   },
 });
 

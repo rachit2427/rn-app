@@ -1,3 +1,5 @@
+import { API_BASE_URL, API_NAME, AUTHOR_NAME } from '@env';
+
 export const EnglishTranslations = {
   global: {
     actions: {
@@ -14,6 +16,7 @@ export const EnglishTranslations = {
     },
     headerRight: {
       favourites: 'My Favourites',
+      about: 'About',
     },
   },
   screens: {
@@ -65,6 +68,19 @@ export const EnglishTranslations = {
         languages: 'Languages',
         currencies: 'Currencies',
         timezones: 'Timezones',
+      },
+    },
+    about: {
+      createdBy: `Carefully crafted by ${AUTHOR_NAME}!`,
+      description: `This app uses ${API_NAME} (${API_BASE_URL}) to fetch data about countries.`,
+      cta: {
+        visitApi: `Visit the ${API_NAME}`,
+        followOnLinkedIn: 'Follow me on LinkedIn',
+      },
+      dialog: {
+        title: 'Whoops!',
+        description: "We couldn't open the URL:",
+        cta: 'Close',
       },
     },
   },

@@ -34,6 +34,11 @@ const AppNavigationComponent: React.FC = () => (
         name={Routes.CountryDetail}
         getComponent={() => require('./screens/CountryDetail').CountryDetail}
       />
+
+      <Stack.Screen
+        name={Routes.About}
+        getComponent={() => require('./screens/About').About}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );
