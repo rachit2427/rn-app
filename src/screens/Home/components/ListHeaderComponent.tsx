@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Divider, Searchbar, useTheme } from 'react-native-paper';
+import { Divider, Searchbar, useTheme } from 'react-native-paper';
 
+import { FilterButton } from '@src/screens/Home/components/FilterButton';
+import { SortButton } from '@src/screens/Home/components/SortButton';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setSearchQueryAction } from '@src/state/country/countrySlice';
 import { translations } from '@src/translations';
@@ -36,15 +38,11 @@ const ListHeaderComponentRaw: React.FC = () => {
 
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
-          <Button mode="contained-tonal">
-            {translations.screens.home.cta.sort}
-          </Button>
+          <SortButton />
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button mode="contained-tonal">
-            {translations.screens.home.cta.filter}
-          </Button>
+          <FilterButton />
         </View>
       </View>
 
