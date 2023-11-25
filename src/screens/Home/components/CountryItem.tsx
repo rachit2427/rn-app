@@ -43,7 +43,9 @@ const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
       <Card.Title
         title={`${country.name.official} / ${country.name.common}`}
         titleNumberOfLines={2}
-        subtitle={`${country.region} / ${country.subregion}`}
+        subtitle={`${country.region} / ${
+          country.subregion ? country.subregion : '-'
+        }`}
         titleVariant="titleLarge"
         subtitleVariant="bodyMedium"
         left={Flag}

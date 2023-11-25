@@ -71,7 +71,7 @@ const CountryDetailComponent: React.FC = () => {
         </Text>
 
         <Text variant="bodyLarge">
-          {`${country.region} / ${country.subregion}`}
+          {`${country.region} / ${country.subregion ? country.subregion : '-'}`}
         </Text>
 
         <View style={styles.itemSpacing}>

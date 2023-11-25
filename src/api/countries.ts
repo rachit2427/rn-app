@@ -4,7 +4,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import type { Country } from '@src/api/types';
 import { getBaseUrl } from '@src/config/api';
-import { setCountryMapAction } from '@src/state/country/countrySlice';
+import {
+  setCountryMapAction,
+  setRegionSubregionMapAction,
+} from '@src/state/country/countrySlice';
 
 export const countryApi = createApi({
   reducerPath: 'countryApi',
@@ -46,6 +49,27 @@ export const countryApi = createApi({
             setCountryMapAction(
               Object.fromEntries(
                 countries.map(country => [country.id, country]),
+              ),
+            ),
+          );
+
+          dispatch(
+            setRegionSubregionMapAction(
+              countries.reduce(
+                (acc, country) => {
+                  const { region, subregion } = country;
+
+                  if (!acc[region]) {
+                    acc[region] = [];
+                  }
+
+                  if (subregion && !acc[region].includes(subregion)) {
+                    acc[region].push(subregion);
+                  }
+
+                  return acc;
+                },
+                {} as Record<string, string[]>,
               ),
             ),
           );

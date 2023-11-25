@@ -13,7 +13,7 @@ export interface Country {
   capital: string[];
 
   region: string;
-  subregion: string;
+  subregion?: string;
 
   population: number;
   currencies: Record<
@@ -38,4 +38,9 @@ export interface Country {
   };
 
   timezones: string[];
+}
+
+export interface Filter {
+  region?: string;
+  subregion?: string;
 }

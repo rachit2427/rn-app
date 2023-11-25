@@ -1,4 +1,9 @@
 export const EnglishTranslations = {
+  global: {
+    actions: {
+      back: 'Back',
+    },
+  },
   components: {
     genericError: {
       title: 'Whoops!',
@@ -15,6 +20,7 @@ export const EnglishTranslations = {
       cta: {
         sort: 'Sort by',
         filter: 'Filter by',
+        clearFilter: 'Clear filter',
       },
       alert: {
         shuffleWithSearch: {
