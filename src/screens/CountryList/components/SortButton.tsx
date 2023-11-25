@@ -3,19 +3,18 @@ import { Divider, Menu, useTheme } from 'react-native-paper';
 
 import type { SortKey } from '@src/api/types';
 import { ButtonWithMenu } from '@src/components/ButtonWithMenu';
+import { translations } from '@src/service/translations';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setSortKeyAction } from '@src/state/country/countrySlice';
-import { translations } from '@src/service/translations';
 
 const SortButtonComponent: React.FC = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const sortKey = useAppSelector(state => state.country.sortKey);
 
-  const sortOptions = Object.entries(translations.screens.home.sortOptions) as [
-    SortKey,
-    string,
-  ][];
+  const sortOptions = Object.entries(
+    translations.screens.countryList.sortOptions,
+  ) as [SortKey, string][];
 
   const setSortKey = useCallback(
     (key?: SortKey) => {
@@ -26,7 +25,7 @@ const SortButtonComponent: React.FC = () => {
 
   return (
     <ButtonWithMenu
-      buttonTitle={translations.screens.home.cta.sort}
+      buttonTitle={translations.screens.countryList.cta.sort}
       icon="sort"
       active={Boolean(sortKey)}
     >

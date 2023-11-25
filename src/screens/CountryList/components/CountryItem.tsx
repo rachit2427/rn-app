@@ -72,7 +72,7 @@ const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
           }}
           onPress={onPress}
         >
-          {translations.screens.home.countryCard.cta}
+          {translations.screens.countryList.countryCard.cta}
         </Button>
       </Card.Actions>
     </Card>

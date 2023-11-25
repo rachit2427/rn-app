@@ -5,7 +5,8 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import type { RootStackParamList } from '@src/config/navigation';
-import { defaultNavigationOptions, Routes } from '@src/config/navigation';
+import { Routes } from '@src/config/navigation';
+import { defaultNavigationOptions } from '@src/utils/app';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { LightTheme } = adaptNavigationTheme({
@@ -15,23 +16,23 @@ const { LightTheme } = adaptNavigationTheme({
 const AppNavigationComponent: React.FC = () => (
   <NavigationContainer theme={LightTheme}>
     <Stack.Navigator
-      initialRouteName={Routes.Home}
+      initialRouteName={Routes.CountryList}
       screenOptions={defaultNavigationOptions}
     >
       <Stack.Screen
-        name={Routes.Home}
+        name={Routes.CountryList}
         getComponent={() => require('./screens/CountryList').CountryList}
+        options={({ route }) => ({
+          ...defaultNavigationOptions,
+          ...(route.params?.isFavouriteList === false
+            ? { headerRight: () => null }
+            : undefined),
+        })}
       />
 
       <Stack.Screen
         name={Routes.CountryDetail}
         getComponent={() => require('./screens/CountryDetail').CountryDetail}
-      />
-
-      <Stack.Screen
-        name={Routes.Favourites}
-        getComponent={() => require('./screens/CountryList').CountryList}
-        options={{ headerRight: undefined }}
       />
     </Stack.Navigator>
   </NavigationContainer>

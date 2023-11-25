@@ -16,11 +16,11 @@ const ListEmptyComponentComponent: React.FC<ListEmptyComponentProps> = ({}) => {
   return (
     <View style={styles.container}>
       <Text variant="titleLarge">
-        {translations.screens.home.emptyList.title}
+        {translations.screens.countryList.emptyList.title}
       </Text>
 
       <Text variant="bodyMedium">
-        {translations.screens.home.emptyList.description}
+        {translations.screens.countryList.emptyList.description}
       </Text>
     </View>
   );

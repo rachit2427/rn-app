@@ -47,4 +47,4 @@ export interface Filter {
   subregion?: string;
 }
 
-export type SortKey = keyof typeof translations.screens.home.sortOptions;
+export type SortKey = keyof typeof translations.screens.countryList.sortOptions;

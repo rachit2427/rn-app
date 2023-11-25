@@ -17,7 +17,7 @@ export const EnglishTranslations = {
     },
   },
   screens: {
-    home: {
+    countryList: {
       input: {
         label: 'Find your next destination',
       },

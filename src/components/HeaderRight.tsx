@@ -4,20 +4,21 @@ import { IconButton, MD3Colors, Menu } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
 
+import type { NavigtionProps } from '@src/config/navigation';
 import { Routes } from '@src/config/navigation';
 import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
 const HeaderRightComponent: React.FC = () => {
   const [visible, setVisible] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigtionProps<Routes>>();
 
   const openMenu = useCallback(() => setVisible(true), []);
   const closeMenu = useCallback(() => setVisible(false), []);
 
   const openFavourites = useCallback(() => {
     closeMenu();
-    navigation.navigate(Routes.Favourites);
+    navigation.push(Routes.CountryList, { isFavouriteList: true });
   }, [closeMenu, navigation]);
 
   return (

@@ -101,7 +101,7 @@ const FilterButtonComponent: React.FC = () => {
 
   return (
     <ButtonWithMenu
-      buttonTitle={translations.screens.home.cta.filter}
+      buttonTitle={translations.screens.countryList.cta.filter}
       onClose={onMenuClose}
       icon="filter"
       active={Boolean(filter.region || filter.subregion)}

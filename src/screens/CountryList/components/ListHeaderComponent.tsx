@@ -4,9 +4,9 @@ import { Divider, Searchbar, useTheme } from 'react-native-paper';
 
 import { FilterButton } from '@src/screens/CountryList/components/FilterButton';
 import { SortButton } from '@src/screens/CountryList/components/SortButton';
+import { translations } from '@src/service/translations';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setSearchQueryAction } from '@src/state/country/countrySlice';
-import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
 const ListHeaderComponentRaw: React.FC = () => {
@@ -31,7 +31,7 @@ const ListHeaderComponentRaw: React.FC = () => {
       ]}
     >
       <Searchbar
-        placeholder={translations.screens.home.input.label}
+        placeholder={translations.screens.countryList.input.label}
         value={searchQuery}
         onChangeText={setSearchQuery}
       />

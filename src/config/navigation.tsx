@@ -1,30 +1,21 @@
-import React from 'react';
-
 import type { RouteProp as RoutePropBase } from '@react-navigation/native';
-import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { HeaderRight } from '@src/components/HeaderRight';
 import type { CountryDetailProps } from '@src/screens/CountryDetail';
+import type { CountryListProps } from '@src/screens/CountryList';
 
 export enum Routes {
-  Home = 'Home',
+  CountryList = 'CountryList',
   CountryDetail = 'CountryDetail',
-  Favourites = 'Favourites',
 }
 
 export type RootStackParamList = {
-  [Routes.Home]: undefined;
+  [Routes.CountryList]: CountryListProps;
   [Routes.CountryDetail]: CountryDetailProps;
-  [Routes.Favourites]: undefined;
-};
-
-export const defaultNavigationOptions: NativeStackNavigationOptions = {
-  headerTitleAlign: 'center',
-  animation: 'slide_from_right',
-  animationTypeForReplace: 'pop',
-  headerBackTitleVisible: false,
-  headerTitle: '',
-  headerRight: () => <HeaderRight />,
 };
 
 export type RouteProp<R extends Routes> = RoutePropBase<RootStackParamList, R>;
+export type NavigtionProps<R extends Routes> = NativeStackNavigationProp<
+  RootStackParamList,
+  R
+>;
