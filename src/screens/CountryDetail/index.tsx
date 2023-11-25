@@ -20,7 +20,7 @@ import {
   type ListItemProps,
 } from '@src/screens/CountryDetail/components/ListItem';
 import { getListItems } from '@src/screens/CountryDetail/utils';
-import { useCountry } from '@src/screens/Home/hooks/useCountries';
+import { useCountry } from '@src/screens/CountryList/hooks/useCountries';
 import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 

@@ -6,10 +6,10 @@ import { useGetAllCountriesQuery } from '@src/api/countries';
 import type { Country } from '@src/api/types';
 import { KeyboardAwareView } from '@src/components/KeyboardAwareView';
 import { useInsetBottom } from '@src/hooks/useInsetBottom';
-import { CountryItem } from '@src/screens/Home/components/CountryItem';
-import { ListEmptyComponent } from '@src/screens/Home/components/ListEmptyComponent';
-import { ListHeaderComponent } from '@src/screens/Home/components/ListHeaderComponent';
-import { useCountries } from '@src/screens/Home/hooks/useCountries';
+import { CountryItem } from '@src/screens/CountryList/components/CountryItem';
+import { ListEmptyComponent } from '@src/screens/CountryList/components/ListEmptyComponent';
+import { ListHeaderComponent } from '@src/screens/CountryList/components/ListHeaderComponent';
+import { useCountries } from '@src/screens/CountryList/hooks/useCountries';
 import { Spacing } from '@src/utils/spacing';
 
 const HomeComponent: React.FC = () => {
