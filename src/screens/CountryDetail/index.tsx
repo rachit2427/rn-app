@@ -1,11 +1,19 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 import { Image, Linking, ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Dialog, Portal, Text } from 'react-native-paper';
+import {
+  Button,
+  Dialog,
+  IconButton,
+  MD3Colors,
+  Portal,
+  Text,
+} from 'react-native-paper';
 
 import { useRoute } from '@react-navigation/native';
 
 import type { RouteProp, Routes } from '@src/config/navigation';
+import { useFavouriteCountry } from '@src/hooks/useFavouriteCountry';
 import { useInsetBottom } from '@src/hooks/useInsetBottom';
 import {
   ListItem,
@@ -26,6 +34,9 @@ const CountryDetailComponent: React.FC = () => {
 
   const { params } = useRoute<RouteProp<Routes.CountryDetail>>();
   const country = useCountry(params.id);
+  const { isFavourite, setFavourite, removeFavourite } = useFavouriteCountry(
+    params.id,
+  );
 
   const [showDialog, setShowDialog] = React.useState(false);
   const hideDialog = useCallback(() => setShowDialog(false), []);
@@ -66,13 +77,26 @@ const CountryDetailComponent: React.FC = () => {
           resizeMode="cover"
         />
 
-        <Text variant="headlineSmall" style={styles.itemSpacing}>
-          {`${country.name.official} / ${country.name.common}`}
-        </Text>
+        <View style={styles.titleRow}>
+          <View style={styles.titleContainer}>
+            <Text variant="headlineSmall" style={styles.itemSpacing}>
+              {`${country.name.official} / ${country.name.common}`}
+            </Text>
 
-        <Text variant="bodyLarge">
-          {`${country.region} / ${country.subregion ? country.subregion : '-'}`}
-        </Text>
+            <Text variant="bodyLarge">
+              {`${country.region} / ${
+                country.subregion ? country.subregion : '-'
+              }`}
+            </Text>
+          </View>
+
+          <IconButton
+            icon={isFavourite ? 'star' : 'star-outline'}
+            iconColor={isFavourite ? MD3Colors.primary50 : MD3Colors.neutral50}
+            size={24}
+            onPress={isFavourite ? removeFavourite : setFavourite}
+          />
+        </View>
 
         <View style={styles.itemSpacing}>
           {listItems.map((item, index) => (
@@ -135,6 +159,15 @@ const styles = StyleSheet.create({
   },
   itemSpacing: {
     marginTop: Spacing.md,
+  },
+  titleRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  titleContainer: {
+    flex: 1,
+    paddingRight: Spacing.xs,
   },
 });
 

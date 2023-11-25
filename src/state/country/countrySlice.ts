@@ -9,6 +9,7 @@ export interface CountryState {
   regionSubregionMap: Record<string, string[]>;
   filter: Filter;
   sortKey?: SortKey;
+  favouriteCountries: string[];
 }
 
 const initialState: CountryState = {
@@ -16,6 +17,7 @@ const initialState: CountryState = {
   countryMap: {},
   regionSubregionMap: {},
   filter: {},
+  favouriteCountries: [],
 };
 
 export const countrySlice = createSlice({
@@ -43,6 +45,14 @@ export const countrySlice = createSlice({
     setSortKeyAction: (state, action: PayloadAction<SortKey | undefined>) => {
       state.sortKey = action.payload;
     },
+    addFavouriteCountryAction: (state, action: PayloadAction<string>) => {
+      state.favouriteCountries.push(action.payload);
+    },
+    removeFavouriteCountryAction: (state, action: PayloadAction<string>) => {
+      state.favouriteCountries = state.favouriteCountries.filter(
+        countryCode => countryCode !== action.payload,
+      );
+    },
   },
 });
 
@@ -52,6 +62,8 @@ export const {
   setRegionSubregionMapAction,
   setFilterAction,
   setSortKeyAction,
+  addFavouriteCountryAction,
+  removeFavouriteCountryAction,
 } = countrySlice.actions;
 
 export const countryReducer = countrySlice.reducer;
