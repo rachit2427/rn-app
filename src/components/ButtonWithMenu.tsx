@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import React, { memo, useCallback, useState } from 'react';
+import type { StyleProp, ViewStyle } from 'react-native/types';
 import type { ButtonProps } from 'react-native-paper';
 import { Button, Menu } from 'react-native-paper';
 
@@ -8,11 +9,20 @@ interface ButtonWithMenuProps extends ButtonProps {
   onOpen?: () => void;
   onClose?: () => void;
   active?: boolean;
+  menuStyle?: StyleProp<ViewStyle>;
 }
 
 const ButtonWithMenuComponent: React.FC<
   PropsWithChildren<ButtonWithMenuProps>
-> = ({ buttonTitle, onOpen, onClose, active, children, ...props }) => {
+> = ({
+  buttonTitle,
+  onOpen,
+  onClose,
+  active,
+  menuStyle,
+  children,
+  ...props
+}) => {
   const [visible, setVisible] = useState(false);
 
   const openMenu = useCallback(() => {
@@ -39,6 +49,7 @@ const ButtonWithMenuComponent: React.FC<
         </Button>
       }
       anchorPosition="bottom"
+      style={menuStyle}
     >
       {children}
     </Menu>

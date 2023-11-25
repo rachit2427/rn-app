@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { Divider, Menu, useTheme } from 'react-native-paper';
 
 import { ButtonWithMenu } from '@src/components/ButtonWithMenu';
@@ -6,6 +7,7 @@ import { useMountedRef } from '@src/hooks/useMountedRef';
 import { translations } from '@src/service/translations';
 import { useAppDispatch, useAppSelector } from '@src/state/app/hooks';
 import { setFilterAction } from '@src/state/country/countrySlice';
+import { Spacing } from '@src/utils/spacing';
 
 const FilterButtonComponent: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -101,6 +103,7 @@ const FilterButtonComponent: React.FC = () => {
       onClose={onMenuClose}
       icon="filter"
       active={Boolean(filter.region || filter.subregion)}
+      menuStyle={styles.menu}
     >
       {items.map((item, index) => (
         <React.Fragment key={index}>
@@ -120,5 +123,11 @@ const FilterButtonComponent: React.FC = () => {
     </ButtonWithMenu>
   );
 };
+
+const styles = StyleSheet.create({
+  menu: {
+    right: Spacing.md,
+  },
+});
 
 export const FilterButton = memo(FilterButtonComponent);
