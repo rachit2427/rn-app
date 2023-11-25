@@ -1,11 +1,12 @@
 import React, { memo, useCallback } from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Button, Card } from 'react-native-paper';
+import { Button, Card, useTheme } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
 
 import type { Country } from '@src/api/types';
 import { Routes } from '@src/config/navigation';
+import { useFavouriteCountry } from '@src/hooks/useFavouriteCountry';
 import { translations } from '@src/service/translations';
 import { Spacing } from '@src/utils/spacing';
 
@@ -14,7 +15,9 @@ interface CountryItemProps {
 }
 
 const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
+  const theme = useTheme();
   const navigation = useNavigation();
+  const { isFavourite } = useFavouriteCountry(country.id);
 
   const onPress = useCallback(
     () =>
@@ -37,7 +40,14 @@ const CountryItemComponent: React.FC<CountryItemProps> = ({ country }) => {
   );
 
   return (
-    <Card style={styles.card}>
+    <Card
+      style={[
+        styles.card,
+        isFavourite
+          ? { backgroundColor: theme.colors.secondaryContainer }
+          : null,
+      ]}
+    >
       <Card.Cover source={{ uri: country.coverImage }} />
 
       <Card.Title
