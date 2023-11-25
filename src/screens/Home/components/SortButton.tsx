@@ -5,12 +5,16 @@ import { ButtonWithMenu } from '@src/components/ButtonWithMenu';
 import { translations } from '@src/translations';
 
 const SortButtonComponent: React.FC = () => {
+  const sortOptions = Object.entries(translations.screens.home.sortOptions);
+
   return (
     <ButtonWithMenu buttonTitle={translations.screens.home.cta.sort}>
-      <Menu.Item onPress={() => {}} title="Item 1" />
-      <Menu.Item onPress={() => {}} title="Item 2" />
-      <Divider />
-      <Menu.Item onPress={() => {}} title="Item 3" />
+      {sortOptions.map(([key, option], index) => (
+        <React.Fragment key={key}>
+          <Menu.Item onPress={() => {}} title={option} />
+          {index !== sortOptions.length - 1 ? <Divider /> : null}
+        </React.Fragment>
+      ))}
     </ButtonWithMenu>
   );
 };

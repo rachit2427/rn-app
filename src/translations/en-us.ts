@@ -22,6 +22,14 @@ export const EnglishTranslations = {
         filter: 'Filter by',
         clearFilter: 'Clear filter',
       },
+      sortOptions: {
+        officialNameAsc: 'Official Name (A-Z)',
+        officialNameDesc: 'Official Name (Z-A)',
+        commonNameAsc: 'Common Name (A-Z)',
+        commonNameDesc: 'Common Name (Z-A)',
+        populationAsc: 'Population (Low to High)',
+        populationDesc: 'Population (High to Low)',
+      },
       alert: {
         shuffleWithSearch: {
           title: 'Whoops!',
