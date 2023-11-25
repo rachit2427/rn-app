@@ -7,11 +7,12 @@ interface ButtonWithMenuProps extends ButtonProps {
   buttonTitle: string;
   onOpen?: () => void;
   onClose?: () => void;
+  active?: boolean;
 }
 
 const ButtonWithMenuComponent: React.FC<
   PropsWithChildren<ButtonWithMenuProps>
-> = ({ buttonTitle, onOpen, onClose, children, ...props }) => {
+> = ({ buttonTitle, onOpen, onClose, active, children, ...props }) => {
   const [visible, setVisible] = useState(false);
 
   const openMenu = useCallback(() => {
@@ -29,7 +30,11 @@ const ButtonWithMenuComponent: React.FC<
       visible={visible}
       onDismiss={closeMenu}
       anchor={
-        <Button mode="contained-tonal" {...props} onPress={openMenu}>
+        <Button
+          mode={active ? 'contained' : 'contained-tonal'}
+          {...props}
+          onPress={openMenu}
+        >
           {buttonTitle}
         </Button>
       }

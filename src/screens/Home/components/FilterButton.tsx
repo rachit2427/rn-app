@@ -103,6 +103,8 @@ const FilterButtonComponent: React.FC = () => {
     <ButtonWithMenu
       buttonTitle={translations.screens.home.cta.filter}
       onClose={onMenuClose}
+      icon={'filter'}
+      active={Boolean(filter.region || filter.subregion)}
     >
       {items.map((item, index) => (
         <React.Fragment key={index}>
