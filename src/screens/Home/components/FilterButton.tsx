@@ -69,7 +69,7 @@ const FilterButtonComponent: React.FC = () => {
           ? [
               {
                 onPress: () => setFilter(),
-                title: translations.screens.home.cta.clearFilter,
+                title: translations.global.actions.clear,
                 leadingIcon: 'close',
               },
             ]
@@ -103,7 +103,7 @@ const FilterButtonComponent: React.FC = () => {
     <ButtonWithMenu
       buttonTitle={translations.screens.home.cta.filter}
       onClose={onMenuClose}
-      icon={'filter'}
+      icon="filter"
       active={Boolean(filter.region || filter.subregion)}
     >
       {items.map((item, index) => (

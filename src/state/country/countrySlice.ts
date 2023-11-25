@@ -1,13 +1,14 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { Country, Filter } from '@src/api/types';
+import type { Country, Filter, SortKey } from '@src/api/types';
 
 export interface CountryState {
   searchQuery: string;
   countryMap: Record<string, Country>;
   regionSubregionMap: Record<string, string[]>;
   filter: Filter;
+  sortKey?: SortKey;
 }
 
 const initialState: CountryState = {
@@ -39,15 +40,18 @@ export const countrySlice = createSlice({
     setFilterAction: (state, action: PayloadAction<Filter>) => {
       state.filter = action.payload;
     },
+    setSortKeyAction: (state, action: PayloadAction<SortKey | undefined>) => {
+      state.sortKey = action.payload;
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   setSearchQueryAction,
   setCountryMapAction,
   setRegionSubregionMapAction,
   setFilterAction,
+  setSortKeyAction,
 } = countrySlice.actions;
 
 export const countryReducer = countrySlice.reducer;

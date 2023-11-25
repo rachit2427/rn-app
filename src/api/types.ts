@@ -1,3 +1,5 @@
+import type { translations } from '@src/translations';
+
 export interface Country {
   id: string;
   coverImage: string;
@@ -44,3 +46,5 @@ export interface Filter {
   region?: string;
   subregion?: string;
 }
+
+export type SortKey = keyof typeof translations.screens.home.sortOptions;

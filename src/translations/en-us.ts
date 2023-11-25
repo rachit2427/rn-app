@@ -2,6 +2,7 @@ export const EnglishTranslations = {
   global: {
     actions: {
       back: 'Back',
+      clear: 'Clear',
     },
   },
   components: {
@@ -20,7 +21,6 @@ export const EnglishTranslations = {
       cta: {
         sort: 'Sort by',
         filter: 'Filter by',
-        clearFilter: 'Clear filter',
       },
       sortOptions: {
         officialNameAsc: 'Official Name (A-Z)',
