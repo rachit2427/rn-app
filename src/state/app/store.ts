@@ -3,10 +3,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { countryApi } from '@src/api/countries';
-import { persistedReducer } from '@src/state/app/persistConfig';
+import { countryPersistedReducer } from '@src/state/app/persistConfig';
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    country: countryPersistedReducer,
+    [countryApi.reducerPath]: countryApi.reducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
