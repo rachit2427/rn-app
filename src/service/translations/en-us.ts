@@ -12,6 +12,9 @@ export const EnglishTranslations = {
       error: 'Error',
       retry: 'Retry',
     },
+    headerRight: {
+      favourites: 'My Favourites',
+    },
   },
   screens: {
     home: {

@@ -26,7 +26,11 @@ const AppNavigationComponent: React.FC = () => (
       <Stack.Screen
         name={Routes.CountryDetail}
         getComponent={() => require('./screens/CountryDetail').CountryDetail}
-        // options={{ headerTransparent: true }}
+      />
+
+      <Stack.Screen
+        name={Routes.Favourites}
+        getComponent={() => require('./screens/Home').Home}
       />
     </Stack.Navigator>
   </NavigationContainer>
