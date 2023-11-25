@@ -65,15 +65,11 @@ const FilterButtonComponent: React.FC = () => {
           title: region,
           active: region === filter.region,
         })),
-        ...(filter.region || filter.subregion
-          ? [
-              {
-                onPress: () => setFilter(),
-                title: translations.global.actions.clear,
-                leadingIcon: 'close',
-              },
-            ]
-          : []),
+        {
+          onPress: () => setFilter(),
+          title: translations.global.actions.clear,
+          leadingIcon: 'close',
+        },
       ];
     }
 
