@@ -29,7 +29,7 @@ const SortButtonComponent: React.FC = () => {
       icon="sort"
       active={Boolean(sortKey)}
     >
-      {sortOptions.map(([key, option], index) => (
+      {sortOptions.map(([key, option]) => (
         <React.Fragment key={key}>
           <Menu.Item
             onPress={() => setSortKey(key)}
@@ -40,7 +40,7 @@ const SortButtonComponent: React.FC = () => {
                 : undefined
             }
           />
-          {index !== sortOptions.length - 1 ? <Divider /> : null}
+          <Divider />
         </React.Fragment>
       ))}
       <Menu.Item
